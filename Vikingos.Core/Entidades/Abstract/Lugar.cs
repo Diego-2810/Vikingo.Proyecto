@@ -12,4 +12,10 @@ public abstract class Lugar
     }
 
     public abstract bool ValelaPena(int cantidadVikingos);
+    public abstract double CalcularBotin();
+
+    public virtual void Invadir()
+    {
+        Defensores = 0;
+    }
 }

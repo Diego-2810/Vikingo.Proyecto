@@ -15,13 +15,18 @@ public class Expedicion
         Lugares = new List<Lugar>();
     }
 
-    public bool SubirVikingo(Vikingo vikingo)
+    public (bool Exito, string Mensaje) IntentarSubirVikingo(Vikingo vikingo)
     {
         if (!vikingo.PuedeIrAExpedicion())
-            return false;
+            return (false, $"{vikingo.Nombre} no puede subir a la expedición");
 
         Vikingos.Add(vikingo);
-        return true;
+        return (true, $"{vikingo.Nombre} subió correctamente a la expedición");
+    }
+
+    public bool SubirVikingo(Vikingo vikingo)
+    {
+        return IntentarSubirVikingo(vikingo).Exito;
     }
 
     public int CantidadVikingo()
@@ -36,17 +41,37 @@ public class Expedicion
 
     public bool RealizarExpedicion()
     {
-        return ValelaPena();
+        if (!ValelaPena() || Vikingos.Count == 0)
+            return false;
+
+        double botinTotal = 0;
+
+        foreach (Lugar lugar in Lugares)
+        {
+            botinTotal += lugar.CalcularBotin();
+            lugar.Invadir();
+        }
+
+        double botinPorVikingo = botinTotal / Vikingos.Count;
+        foreach (Vikingo vikingo in Vikingos)
+            vikingo.Oro += botinPorVikingo;
+
+        return true;
     }
 
-    private bool ValelaPena()
+    public bool ValeLaPena()
     {
         int cantidadVikingos = CantidadVikingo();
-        
+
         if (Lugares.Count == 0)
             return false;
 
         return Lugares.All(lugar => lugar.ValelaPena(cantidadVikingos));
+    }
+
+    private bool ValelaPena()
+    {
+        return ValeLaPena();
     }
 
     public string ObtenerResumen()
@@ -54,6 +79,6 @@ public class Expedicion
         return $"Expedición: {Nombre}\n" +
                $"Vikingos: {CantidadVikingo()}\n" +
                $"Lugares: {Lugares.Count}\n" +
-               $"Vale la pena: {RealizarExpedicion()}";
+               $"Vale la pena: {ValeLaPena()}";
     }
 }

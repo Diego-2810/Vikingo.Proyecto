@@ -14,6 +14,7 @@ public class Vikingo
     
     public int Hijos { get; set; }
     public int Hectareas { get; set; }
+    public double Oro { get; set; }
 
     public Vikingo(string nombre, CastaSocial casta, Rol rol)
     {
@@ -24,6 +25,7 @@ public class Vikingo
         Armas = 0;
         Hijos = 0;
         Hectareas = 0;
+        Oro = 0;
     }
 
     public bool EsProductivo()

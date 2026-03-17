@@ -29,14 +29,14 @@ var ivar = new Vikingo("Ivar", new Thrall(), new Soldado())
 // Agregar vikingos a la expedición
 Console.WriteLine("Agregando vikingos:\n");
 
-bool r1 = expedicion.SubirVikingo(ragnar);
-Console.WriteLine($"{(r1 ? "✓" : "✗")} {ragnar.Nombre} - Soldado, {ragnar.VidasCobradas} vidas, {ragnar.Armas} armas");
+var rvar1 = expedicion.IntentarSubirVikingo(ragnar);
+Console.WriteLine($"{(rvar1.Exito ? "✓" : "✗")} {rvar1.Mensaje}");
 
-bool r2 = expedicion.SubirVikingo(lagertha);
-Console.WriteLine($"{(r2 ? "✓" : "✗")} {lagertha.Nombre} - Granjero, {lagertha.Hijos} hijos, {lagertha.Hectareas} hectáreas");
+var rvar2 = expedicion.IntentarSubirVikingo(lagertha);
+Console.WriteLine($"{(rvar2.Exito ? "✓" : "✗")} {rvar2.Mensaje}");
 
-bool r3 = expedicion.SubirVikingo(ivar);
-Console.WriteLine($"{(r3 ? "✓" : "✗")} {ivar.Nombre} - Soldado, {ivar.VidasCobradas} vidas, {ivar.Armas} armas");
+var rvar3 = expedicion.IntentarSubirVikingo(ivar);
+Console.WriteLine($"{(rvar3.Exito ? "✓" : "✗")} {rvar3.Mensaje}");
 
 // Agregar lugares
 Console.WriteLine("\nLugares a invadir:\n");
@@ -53,7 +53,8 @@ Console.WriteLine($"París: {capital.Defensores} defensores\n");
 // Resumen
 Console.WriteLine("Resumen de la expedición");
 Console.WriteLine($"Vikingos: {expedicion.CantidadVikingo()}");
-Console.WriteLine($"Vale la pena: {expedicion.RealizarExpedicion()}\n");
+Console.WriteLine($"Vale la pena: {expedicion.ValeLaPena()}");
+Console.WriteLine($"Se realizó: {expedicion.RealizarExpedicion()}\n");
 
 // Ascenso
 Console.WriteLine("Prueba de ascenso:\n");

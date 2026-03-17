@@ -48,4 +48,18 @@ public class CastaTest
 
         Assert.IsType<Thrall>(vikingo.Casta);
     }
+    [Fact]
+    public void RagnarSiendoKarlEscalaCorrectamenteAThrall()
+    {
+        var ragnar = new Vikingo("Ragnar", new Karl(), new Soldado())
+        {
+            VidasCobradas = 35,
+            Armas = 6
+        };
+
+        ragnar.Ascender();
+
+        Assert.IsType<Thrall>(ragnar.Casta);
+    }
+
 }
