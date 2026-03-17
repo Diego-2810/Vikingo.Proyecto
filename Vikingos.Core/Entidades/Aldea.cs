@@ -16,4 +16,15 @@ public class Aldea : Lugar
     {
         return Crucifijos >= 15;
     }
+
+    public override double CalcularBotin()
+    {
+        return Crucifijos;
+    }
+
+    public override void Invadir()
+    {
+        Crucifijos = 0;
+        base.Invadir();
+    }
 }

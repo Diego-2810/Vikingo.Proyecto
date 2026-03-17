@@ -16,9 +16,14 @@ public class Capital : Lugar
     {
         if (cantidadVikingos == 0) return false;
         
-        double botin = Defensores * FactorRiqueza;
+        double botin = CalcularBotin();
         double monidasPorVikingo = botin / cantidadVikingos;
         
         return monidasPorVikingo >= 3;
+    }
+
+    public override double CalcularBotin()
+    {
+        return Defensores * FactorRiqueza;
     }
 }
